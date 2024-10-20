@@ -1,14 +1,11 @@
 <template>
-  <div class="relative w-full max-w-2xl mx-auto space-y-4">
-    <Timer />
-    <div class="grid grid-cols-4 gap-2">
-      <div v-for="(word, index) in shuffledWords" :key="word.word" @click="!isAnimating && selectWord(index)" :class="[
-        'w-24 h-24 flex items-center justify-center cursor-pointer text-center transition-colors',
-        getCellClass(index),
-        { 'pointer-events-none': isAnimating }
-      ]" :style="getCellStyle(index)">
-        {{ word.word }}
-      </div>
+  <div class="grid grid-cols-4 gap-2">
+    <div v-for="(word, index) in shuffledWords" :key="word.word" @click="!isAnimating && selectWord(index)" :class="[
+      'w-24 h-24 flex items-center justify-center cursor-pointer text-center transition-colors',
+      getCellClass(index),
+      { 'pointer-events-none': isAnimating }
+    ]" :style="getCellStyle(index)">
+      {{ word.word }}
     </div>
   </div>
 </template>
@@ -16,7 +13,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { WordGroup, WordItem } from '../types';
-import Timer from './Timer.vue';
 
 const props = defineProps<{
   wordGroup: WordGroup[];

@@ -1,29 +1,50 @@
-import { createRouter, createWebHistory, RouterOptions } from 'vue-router'
-import WordWall from '../components/WordWall.vue'
-import { WORD_GROUPS } from '../data/list'
+import { createRouter, createWebHistory, RouteLocationNormalizedGeneric, RouterOptions } from "vue-router";
+import BoardPage from "../components/BoardPage.vue";
+import { BOARDS } from "../data/list";
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    setTitle: (route: RouteLocationNormalizedGeneric) => string;
+  }
+}
 
 type Writable<T> = { -readonly [P in keyof T]: T[P] };
 
-const routes: Writable<RouterOptions['routes']> = [
+const routes: Writable<RouterOptions["routes"]> = [
   {
-    path: '/board/:boardId',
-    name: 'Board',
-    component: WordWall,
-    props: (route) => ({ 
-      wordGroup: WORD_GROUPS[route.params.boardId as string] || []
-    })
+    path: "/board/:boardId",
+    name: "Board",
+    component: BoardPage,
+    props: (route) => ({
+      board: BOARDS.find(
+        (board) => board.path === (route.params.boardId as string)
+      ),
+    }),
+    meta: {
+      setTitle: (route: RouteLocationNormalizedGeneric) => {
+        const boardId = route.params.boardId as string;
+        return `Word Wall - ${boardId.charAt(0).toUpperCase() + boardId.slice(1).replace(/-/g, ' ')}`;
+      }
+    },
   },
   {
-    path: '/',
-    redirect: `/board/${Object.keys(WORD_GROUPS)[0]}`
-  }
+    path: "/",
+    redirect: `/board/${BOARDS[0].path}`,
+  },
 ];
-
-routes.push({ path: '/', redirect: `/board/${Object.keys(WORD_GROUPS)[0]}` })
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+});
+
+router.beforeEach((to, _from, next) => {
+  if (to.meta.setTitle) {
+    document.title = to.meta.setTitle(to);
+  } else {
+    document.title = 'Word Wall';
+  }
+  next();
 })
 
-export default router
+export default router;
