@@ -1,4 +1,6 @@
-export const WORD_GROUPS = {
+import { WordGroup } from "../types";
+
+export const WORD_GROUPS: Record<string, WordGroup[]> = {
   "sample-board": [
     { groupName: "Animals", words: ["cat", "dog", "elephant", "lion"] },
     { groupName: "Fruits", words: ["apple", "banana", "orange", "pear"] },

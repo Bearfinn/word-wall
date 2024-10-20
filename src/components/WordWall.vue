@@ -12,16 +12,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-
-interface WordItem {
-  word: string;
-  group: string;
-}
-
-interface WordGroup {
-  groupName: string;
-  words: string[];
-}
+import { WordGroup, WordItem } from '../types';
 
 const props = defineProps<{
   wordGroup: WordGroup[];
