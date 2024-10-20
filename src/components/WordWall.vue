@@ -1,9 +1,9 @@
 <template>
-  <div class="relative w-full max-w-2xl mx-auto">
+  <div class="relative w-full max-w-2xl mx-auto space-y-4">
     <Timer />
-    <div class="grid grid-cols-4 gap-2 p-4">
+    <div class="grid grid-cols-4 gap-2">
       <div v-for="(word, index) in shuffledWords" :key="word.word" @click="!isAnimating && selectWord(index)" :class="[
-        'w-24 h-24 flex items-center justify-center cursor-pointer text-center',
+        'w-24 h-24 flex items-center justify-center cursor-pointer text-center transition-colors',
         getCellClass(index),
         { 'pointer-events-none': isAnimating }
       ]" :style="getCellStyle(index)">
@@ -106,9 +106,9 @@ const getCellClass = (index: number) => {
     return 'bg-green-500 text-white';
   }
   if (selectedIndices.value.includes(index)) {
-    return 'bg-yellow-300';
+    return 'bg-yellow-300 text-gray-900';
   }
-  return 'bg-gray-500';
+  return 'bg-gray-200 dark:bg-gray-500';
 };
 
 const getCellStyle = (index: number) => {
