@@ -14,7 +14,7 @@ export const WORD_GROUPS: Record<string, WordGroup[]> = {
     { groupName: "Grains", words: ["rice", "wheat", "corn", "barley"] },
   ],
   "kpop-board-1": [
-    { groupName: "Has a song named 'Fire'", words: ["BTS", "EXID", "SEVENTEEN", "TWICE"] },
+    { groupName: "Has a song named 'Fire'", words: ["BTS", "EXID", "SEVENTEEN", "2NE1"] },
     { groupName: "Has 12 members at debut", words: ["LOONA", "IZ*ONE", "WJSN", "Treasure"] },
     { groupName: "Has one member left the group", words: ["(G)I-DLE", "LE SSERAFIM", "NMIXX", "Stray Kids"] }, 
     { groupName: "Formed as a project group and disbanded", words: ["I.O.I", "Wanna One", "X1", "Mamadol"] },
