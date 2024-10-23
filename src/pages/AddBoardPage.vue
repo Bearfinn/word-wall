@@ -25,7 +25,7 @@
         <ErrorMessage :error="errors[`wordGroups.${groupIndex}.groupName`]" />
 
         <div class="grid grid-cols-2 gap-2">
-          <div v-for="(word, wordIndex) in group.words" :key="wordIndex">
+          <div v-for="(_word, wordIndex) in group.words" :key="wordIndex">
             <input v-model="group.words[wordIndex]" :placeholder="`Word ${wordIndex + 1}`"
               class="w-full p-2 border rounded"
               :class="{ 'border-red-500': errors[`wordGroups.${groupIndex}.words.${wordIndex}`] }" />
