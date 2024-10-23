@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteLocationNormalizedGeneric, RouterOptions } from "vue-router";
-import BoardPage from "../components/BoardPage.vue";
+import BoardPage from "../pages/BoardPage.vue";
+import AddBoardPage from "../pages/AddBoardPage.vue";
 import { BOARDS } from "../data/list";
+import { getBoardByPath } from "../db/turso";
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -15,10 +17,8 @@ const routes: Writable<RouterOptions["routes"]> = [
     path: "/board/:boardId",
     name: "Board",
     component: BoardPage,
-    props: (route) => ({
-      board: BOARDS.find(
-        (board) => board.path === (route.params.boardId as string)
-      ),
+    props: async (route) => ({
+      board: await getBoardByPath(route.params.boardId as string),
     }),
     meta: {
       setTitle: (route: RouteLocationNormalizedGeneric) => {
@@ -26,6 +26,11 @@ const routes: Writable<RouterOptions["routes"]> = [
         return `Word Wall - ${boardId.charAt(0).toUpperCase() + boardId.slice(1).replace(/-/g, ' ')}`;
       }
     },
+  },
+  {
+    path: "/board/add",
+    name: "Add Board",    
+    component: AddBoardPage
   },
   {
     path: "/",

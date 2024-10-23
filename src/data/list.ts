@@ -35,3 +35,17 @@ export const BOARDS: Board[] = [
     ],
   },
 ];
+
+import { getBoards, getBoardByPath as getTursoBoardByPath, addBoard as addTursoBoard } from "../db/turso";
+
+export async function getBoardList(): Promise<Board[]> {
+  return getBoards();
+}
+
+export async function getBoardByPath(path: string): Promise<Board | null> {
+  return getTursoBoardByPath(path);
+}
+
+export async function addBoard(board: Board): Promise<boolean> {
+  return await addTursoBoard(board);
+}

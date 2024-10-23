@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import WordWall from './WordWall.vue';
 import { Board } from '../types';
 import Timer from './Timer.vue';
+import WordWall from './WordWall.vue';
 
 defineProps<{
   board: Board;
