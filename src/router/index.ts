@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteLocationNormalizedGeneric, RouterOptions } from "vue-router";
-import BoardPage from "../pages/BoardPage.vue";
-import AddBoardPage from "../pages/AddBoardPage.vue";
-import { BOARDS } from "../data/list";
 import { getBoardByPath } from "../db/turso";
+import AddBoardPage from "../pages/AddBoardPage.vue";
+import BoardListPage from "../pages/BoardListPage.vue";
+import BoardPage from "../pages/BoardPage.vue";
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -34,7 +34,8 @@ const routes: Writable<RouterOptions["routes"]> = [
   },
   {
     path: "/",
-    redirect: `/board/${BOARDS[0].path}`,
+    name: "Boards",
+    component: BoardListPage,
   },
 ];
 
