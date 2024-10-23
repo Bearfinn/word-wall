@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const time = ref(0);
-let timer: number | null = null;
+let timer: ReturnType<typeof setInterval> | null = null;
 
 const formatTime = (seconds: number): string => {
   const minutes = Math.floor(seconds / 60);
