@@ -66,11 +66,11 @@ const boardSchema = object({
   )
 });
 
-const newBoard = ref<Board>({
+const newBoard = ref<Omit<Board, 'createdAt' | 'updatedAt'>>({
   path: '',
   name: '',
   description: '',
-  wordGroups: []
+  wordGroups: [],
 });
 
 const errors = ref<Record<string, string[] | undefined>>({});
