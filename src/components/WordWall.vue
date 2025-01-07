@@ -1,11 +1,17 @@
 <template>
-  <div class="grid grid-cols-4 gap-2">
+  <div class="grid grid-cols-4 gap-2 relative">
     <div v-for="(word, index) in shuffledWords" :key="word.word" @click="!isAnimating && selectWord(index)" :class="[
       'w-24 h-24 flex items-center justify-center cursor-pointer text-center transition-colors',
       getCellClass(index),
       { 'pointer-events-none': isAnimating }
     ]" :style="getCellStyle(index)">
       {{ word.word }}
+    </div>
+    <div v-for="group, groupIndex in correctGroupNames" :key="group" class="absolute inset-x-0 flex justify-center"
+      :style="{ top: `calc(${25 * groupIndex}% - 16px)` }">
+      <div class="text-center w-fit font-bold rounded-full bg-white border border-green-500 px-2 py-1 min-w-16">
+        {{ group }}
+      </div>
     </div>
   </div>
 
@@ -22,6 +28,7 @@ const props = defineProps<{
 
 const selectedIndices = ref<number[]>([]);
 const correctWords = ref<Set<string>>(new Set());
+const correctGroupNames = ref<string[]>([]);
 const animatingIndices = ref<number[]>([]);
 const isAnimating = ref(false);
 const finalPositions = ref<number[]>([]);
@@ -64,6 +71,9 @@ const checkSelection = () => {
 
     // Add selected words to correctWords
     selectedWords.forEach(word => correctWords.value.add(word.word));
+
+    // Add selected groups to correctGroups
+    correctGroupNames.value.push(selectedWords[0].group)
 
     // Calculate final positions
     const newCorrectIndices = shuffledWords.value
