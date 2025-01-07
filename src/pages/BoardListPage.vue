@@ -9,19 +9,19 @@
         <li v-for="board in paginatedBoards" :key="board.path" class="bg-white shadow rounded-lg">
           <RouterLink v-if="board.path" :to="{ name: 'Board', params: { boardId: board.path } }"
             class="block p-4 hover:bg-gray-50 transition duration-150 ease-in-out">
-            {{ board.name }}
+            {{ board.name }} {{ board.updatedAt }}
           </RouterLink>
         </li>
       </ul>
       <div class="mt-6 flex justify-between items-center">
         <button @click="prevPage" :disabled="currentPage === 1"
           class="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50">
-          Previous
+          <
         </button>
         <span>Page {{ currentPage }} of {{ totalPages }}</span>
         <button @click="nextPage" :disabled="currentPage === totalPages"
           class="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50">
-          Next
+          >
         </button>
       </div>
     </div>

@@ -39,8 +39,8 @@ export async function getBoardByPath(path: string) {
 export async function addBoard(board: Board) {
   try {
     await client.execute({
-      sql: `INSERT INTO boards (path, name, description, word_groups) VALUES (?, ?, ?, ?)`,
-      args: [board.path, board.name, board.description, JSON.stringify(board.wordGroups)],
+      sql: `INSERT INTO boards (path, name, description, word_groups, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)`,
+      args: [board.path, board.name, board.description, JSON.stringify(board.wordGroups), new Date().toISOString(), new Date().toISOString()],
     });
     return true;
   } catch (error) {

@@ -3,6 +3,8 @@ export interface Board {
   name: string;
   description: string;
   wordGroups: WordGroup[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface WordItem {
