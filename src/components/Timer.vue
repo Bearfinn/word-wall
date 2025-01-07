@@ -22,7 +22,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="text-2xl font-bold dark:bg-gray-800 text-right bg-opacity-80 p-2 rounded-md">
+  <div class="text-2xl text-white font-bold dark:bg-gray-800 text-right bg-opacity-80 p-2 rounded-md">
     {{ formatTime(time) }}
   </div>
 </template>
