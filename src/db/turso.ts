@@ -7,12 +7,14 @@ const client = createClient({
 });
 
 export async function getBoards() {
-  const { rows } = await client.execute(`SELECT * FROM boards`);
+  const { rows } = await client.execute(`SELECT * FROM boards ORDER BY updated_at DESC`);
   return rows.map(row => ({
     path: row.path,
     name: row.name,
     description: row.description,
     wordGroups: JSON.parse(row.word_groups as string),
+    createdAt: row.created_at ? new Date(row.created_at as string) : undefined,
+    updatedAt: row.updated_at ? new Date(row.updated_at as string) : undefined,
   })) as Board[];
 }
 

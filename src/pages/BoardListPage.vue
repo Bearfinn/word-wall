@@ -9,20 +9,27 @@
         <li v-for="board in paginatedBoards" :key="board.path" class="bg-white shadow rounded-lg">
           <RouterLink v-if="board.path" :to="{ name: 'Board', params: { boardId: board.path } }"
             class="block p-4 hover:bg-gray-50 transition duration-150 ease-in-out">
-            {{ board.name }} {{ board.updatedAt }}
+            <div>
+              <div>
+                {{ board.name }}
+
+              </div>
+              <div v-if="board.updatedAt" class="text-sm text-gray-500">created on {{ new Intl.DateTimeFormat('en-US', {
+                dateStyle: 'medium', timeStyle: 'short'
+              }).format(board.updatedAt) }}</div>
+            </div>
           </RouterLink>
         </li>
       </ul>
       <div class="mt-6 flex justify-between items-center">
         <button @click="prevPage" :disabled="currentPage === 1"
           class="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50">
-          <
-        </button>
-        <span>Page {{ currentPage }} of {{ totalPages }}</span>
-        <button @click="nextPage" :disabled="currentPage === totalPages"
-          class="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50">
-          >
-        </button>
+          < </button>
+            <span>Page {{ currentPage }} of {{ totalPages }}</span>
+            <button @click="nextPage" :disabled="currentPage === totalPages"
+              class="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50">
+              >
+            </button>
       </div>
     </div>
     <p v-else class="text-gray-400">No boards available.</p>
