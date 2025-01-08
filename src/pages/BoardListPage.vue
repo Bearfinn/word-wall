@@ -17,8 +17,10 @@
             <div>
               <div>
                 {{ board.name }}
+                <span class="text-gray-400 text-sm">/{{ board.path }}</span>
               </div>
-              <div class="text-gray-500 text-sm">/{{ board.path }}</div>
+              <div class="text-sm text-gray-600">{{ board.description }}</div>
+
             </div>
             <div class="flex flex-col items-end">
               <div v-if="board.updatedAt" class="text-sm text-gray-500">created {{ new Intl.DateTimeFormat('en-US', {
