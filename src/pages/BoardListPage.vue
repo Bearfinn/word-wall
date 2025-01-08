@@ -1,22 +1,30 @@
 <template>
   <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Available Boards</h1>
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">Available Boards</h1>
+      <button @click="createNewBoard"
+        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-600 transition duration-150 ease-in-out">
+        Create New Board </button>
+    </div>
     <div v-if="loading" class="text-center">
       <p class="text-gray-400">Loading boards...</p>
     </div>
-    <div v-else-if="boards.length > 0">
-      <ul class="space-y-4">
-        <li v-for="board in paginatedBoards" :key="board.path" class="bg-white shadow rounded-lg">
+    <div v-else-if="boards.length > 0" class="-ml-4">
+      <ul class="divide-y divide-y-gray-200">
+        <li v-for="board in paginatedBoards" :key="board.path" class="bg-white">
           <RouterLink v-if="board.path" :to="{ name: 'Board', params: { boardId: board.path } }"
-            class="block p-4 hover:bg-gray-50 transition duration-150 ease-in-out">
+            class="p-4 hover:bg-gray-50 transition duration-150 ease-in-out flex justify-between items-center rounded-lg">
             <div>
               <div>
                 {{ board.name }}
-
               </div>
-              <div v-if="board.updatedAt" class="text-sm text-gray-500">created on {{ new Intl.DateTimeFormat('en-US', {
+              <div class="text-gray-500 text-sm">/{{ board.path }}</div>
+            </div>
+            <div class="flex flex-col items-end">
+              <div v-if="board.updatedAt" class="text-sm text-gray-500">created {{ new Intl.DateTimeFormat('en-US', {
                 dateStyle: 'medium', timeStyle: 'short'
               }).format(board.updatedAt) }}</div>
+              <div class="text-sm">by anonymous</div>
             </div>
           </RouterLink>
         </li>
@@ -33,10 +41,6 @@
       </div>
     </div>
     <p v-else class="text-gray-400">No boards available.</p>
-    <button @click="createNewBoard"
-      class="mt-8 px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-150 ease-in-out">
-      Create New Board
-    </button>
   </div>
 </template>
 
